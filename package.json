@@ -2,7 +2,10 @@
   "name": "@ns-nx-demo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build",
+    "start": "nx serve"
+  },
   "private": true,
   "devDependencies": {
     "@nestjs/schematics": "^10.0.1",

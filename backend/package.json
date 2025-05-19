@@ -2,6 +2,12 @@
   "name": "@ns-nx-demo/backend",
   "version": "0.0.1",
   "private": true,
+
+  "scripts": {
+    "build": "nx build",
+    "start": "nx serve"
+  },
+
   "nx": {
     "targets": {
       "build": {

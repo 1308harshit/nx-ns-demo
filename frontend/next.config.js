@@ -3,14 +3,17 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
 
-
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  // Use this to set Nx-specific options
-  // See: https://nx.dev/recipes/next/next-config-setup
+  // Optional: Set custom options
   nx: {},
+
+  // Optional: Log the port Next.js is expected to bind to
+  env: {
+    PORT: process.env.PORT || '3000',
+  },
 };
 
 const plugins = [
@@ -19,4 +22,3 @@ const plugins = [
 ];
 
 module.exports = composePlugins(...plugins)(nextConfig);
-

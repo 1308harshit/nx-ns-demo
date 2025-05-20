@@ -1,90 +1,119 @@
 # NsNxDemo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A full-stack application built with Nx, Next.js (frontend), and NestJS (backend).
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Prerequisites
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- Node.js (v18 or later)
+- npm (v8 or later)
 
-## Finish your remote caching setup
+## Installation
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/tgltwyDKFs)
-
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+1. Create a new Nx workspace:
+```bash
+npx create-nx-workspace@latest ns-nx-demo
+# Select the following options:
+# - What to create in the new workspace: empty
+# - Package manager: npm
 ```
 
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
+2. Navigate to the workspace:
+```bash
+cd ns-nx-demo
 ```
 
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
+3. Install Nx and required plugins:
+```bash
+npm install --save-dev @nx/next@latest
+npm install --save-dev @nx/next
+npm install --save-dev @nx/nest
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
+4. Create the frontend application:
+```bash
+npx nx generate @nx/next:app frontend
+# Select the following options:
+# - Unit test runner: none
+# - E2E test runner: playwright
+# - App Router: false
+# - src/ directory: false
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
+5. Create the backend application:
+```bash
+npx nx generate @nx/nest:app backend
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+## Development
 
-```sh
-npx nx sync:check
+### Running the Frontend
+From the project root:
+```bash
+npx nx start frontend -p 3001
+```
+The frontend will be available at http://localhost:3001
+
+### Running the Backend
+From the project root:
+```bash
+npx nx serve backend
+```
+The backend will be available at http://localhost:3000
+
+## Deployment (Render.com)
+
+### Backend Deployment
+Build command:
+```bash
+npm install; cd backend; npx nx build --prod
 ```
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+Start command:
+```bash
+npx nx serve --prod
+```
 
+### Frontend Deployment
+Build command:
+```bash
+npm install; cd frontend; npx next build
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Start command:
+```bash
+cd frontend; npx next start -p $PORT
+```
 
-## Install Nx Console
+## Project Structure
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+- `frontend/` - Next.js frontend application
+  - `pages/` - Next.js pages
+  - `public/` - Static assets
+  - `next.config.js` - Next.js configuration
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- `backend/` - NestJS backend application
+  - `src/` - Source code
+    - `app/` - Main application code
+    - `main.ts` - Application entry point
 
-## Useful links
+## Development Tips
 
-Learn more:
+1. The frontend and backend can be run simultaneously in different terminal windows
+2. Frontend development server supports hot reloading
+3. Backend development server supports hot reloading
+4. Use `npx nx graph` to visualize the project dependencies
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Useful Commands
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Build frontend: `npx nx build frontend`
+- Build backend: `npx nx build backend`
+- Test frontend: `npx nx test frontend`
+- Test backend: `npx nx test backend`
+- Lint frontend: `npx nx lint frontend`
+- Lint backend: `npx nx lint backend`
+
+## Learn More
+
+- [Nx Documentation](https://nx.dev)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [NestJS Documentation](https://docs.nestjs.com)

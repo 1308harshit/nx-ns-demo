@@ -19,12 +19,12 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "next start",
+        "command": "next start -p 8080",
         "cwd": "frontend"
       },
       "configurations": {
         "production": {
-          "command": "next start -p ${PORT:-3000}"
+          "command": "next start -p ${PORT:-8080}"
         }
       }
     }

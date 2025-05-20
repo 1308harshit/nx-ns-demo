@@ -10,9 +10,9 @@ const nextConfig = {
   // Optional: Set custom options
   nx: {},
 
-  // Optional: Log the port Next.js is expected to bind to
-  env: {
-    PORT: process.env.PORT || '3000',
+  // Configure the port
+  server: {
+    port: parseInt(process.env.PORT || '3000', 10),
   },
 };
 
